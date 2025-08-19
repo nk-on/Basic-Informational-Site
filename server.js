@@ -8,9 +8,9 @@ function sendHtml(res, filepath) {
   res.write(indexHtml);
 }
 const routes = {
-  "/": "index.html",
-  "/about": "about.html",
-  "/contact": "contact-me.html",
+  "/": "pages/index.html",
+  "/about": "pages/about.html",
+  "/contact": "pages/contact-me.html",
 };
 const server = http.createServer((req, res) => {
   const url = req.url;
@@ -19,7 +19,7 @@ const server = http.createServer((req, res) => {
     sendHtml(res, routes[url]);
   } else {
     writeHead(res, 404);
-    sendHtml(res, "404.html");
+    sendHtml(res, "pages/404.html");
   }
   res.end();
 });
