@@ -7,15 +7,14 @@ function sendHtml(res, filepath) {
   const indexHtml = fs.readFileSync(filepath, res);
   res.write(indexHtml);
 }
+const routes = {
+  "/": "index.html",
+  "/about": "about.html",
+  "/contact": "contact-me.html",
+};
 const server = http.createServer((req, res) => {
   const url = req.url;
-  if (url === "/") {
-    writeHead(res, 200);
-    sendHtml(res, "index.html");
-  } else if (url === "/about") {
-    writeHead(res, 200);
-    sendHtml(res, "about.html");
-  } else if (url === "/contact") {
+  if (routes[url]) {
     writeHead(res, 200);
     sendHtml(res, "contact-me.html");
   } else {
