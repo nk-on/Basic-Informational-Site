@@ -16,7 +16,7 @@ const server = http.createServer((req, res) => {
   const url = req.url;
   if (routes[url]) {
     writeHead(res, 200);
-    sendHtml(res, "contact-me.html");
+    sendHtml(res, routes[url]);
   } else {
     writeHead(res, 404);
     sendHtml(res, "404.html");
