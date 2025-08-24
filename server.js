@@ -1,5 +1,8 @@
+require('dotenv').config();
 const http = require("node:http");
 const fs = require("node:fs");
+// const PORT = process.env.PORT;
+const PORT = process.env.PORT;
 function writeHead(res, statusCode) {
   res.writeHead(statusCode, { "Content-type": "text/html" });
 }
@@ -23,4 +26,4 @@ const server = http.createServer((req, res) => {
   }
   res.end();
 });
-server.listen(8000);
+server.listen(PORT);
