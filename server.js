@@ -1,7 +1,6 @@
 require('dotenv').config();
 const http = require("node:http");
 const fs = require("node:fs");
-// const PORT = process.env.PORT;
 const PORT = process.env.PORT;
 function writeHead(res, statusCode) {
   res.writeHead(statusCode, { "Content-type": "text/html" });
