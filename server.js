@@ -1,28 +1,20 @@
-require('dotenv').config();
-const http = require("node:http");
-const fs = require("node:fs");
-const PORT = process.env.PORT;
-function writeHead(res, statusCode) {
-  res.writeHead(statusCode, { "Content-type": "text/html" });
-}
-function sendHtml(res, filepath) {
-  const indexHtml = fs.readFileSync(filepath, res);
-  res.write(indexHtml);
-}
-const routes = {
-  "/": "pages/index.html",
-  "/about": "pages/about.html",
-  "/contact": "pages/contact-me.html",
-};
-const server = http.createServer((req, res) => {
-  const url = req.url;
-  if (routes[url]) {
-    writeHead(res, 200);
-    sendHtml(res, routes[url]);
-  } else {
-    writeHead(res, 404);
-    sendHtml(res, "pages/404.html");
-  }
-  res.end();
+require("dotenv").config();
+const path = require("node:path");
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 8000;
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/index.html"));
 });
-server.listen(PORT);
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/about.html"));
+});
+app.get("/contact", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages/contact-me.html"));
+});
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "pages/404.html"));
+});
+app.listen(PORT, () => {
+  console.log("I work");
+});
